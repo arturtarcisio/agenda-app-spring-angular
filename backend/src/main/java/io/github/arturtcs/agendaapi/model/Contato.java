@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -21,11 +18,13 @@ public class Contato {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
+    @Column(length = 150, nullable = false)
     private String nome;
 
+    @Column(length = 150, nullable = false)
     private String email;
 
+    @Column()
     private Boolean favorito;
 
 
