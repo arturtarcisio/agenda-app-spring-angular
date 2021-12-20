@@ -18,12 +18,17 @@ export class ContatoComponent implements OnInit {
   ngOnInit(): void {
     this.formulario = this.fb.group({
       nome: ['', Validators.required],
-      email: ['', Validators.email]
+      email: ['', [Validators.required, Validators.email]]
     })
   }
 
   submit(): void {
+    //const nomeValidation = this.formulario.controls.nome.errors.required
+    //const emailVlidation = this.formulario.controls.email.errors.email
+
     console.log(this.formulario.value)
+    const isValid = this.formulario.valid
+    console.log('is valid', isValid)
    // this.service.save(contato).subscribe( response => {
    //   console.log(response)
    // })
