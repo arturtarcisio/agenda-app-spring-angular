@@ -18,9 +18,20 @@ export class ContatoComponent implements OnInit {
   constructor( private service: ContatoService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.montarFormulario()
+    this.listarContatos()
+  }
+
+  montarFormulario() {
     this.formulario = this.fb.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
+    })
+  }
+
+  listarContatos() {
+    this.service.listAll().subscribe( response => {
+      this.contatos = response
     })
   }
 
