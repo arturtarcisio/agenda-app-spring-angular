@@ -35,8 +35,8 @@ public class ContatoController {
 
     //Atualizacao parcial da entidade, apenas um atributo. Utilizar o patch.
     @PatchMapping("{id}/favorito")
-    public void favoritar(@PathVariable Integer id, @RequestBody Boolean favorito) {
-        service.favoritar(id, favorito);
+    public void favoritar(@PathVariable Integer id) {
+        service.favoritar(id);
     }
 
 }

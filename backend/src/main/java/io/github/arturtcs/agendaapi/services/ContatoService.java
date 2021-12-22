@@ -26,10 +26,11 @@ public class ContatoService {
         return repository.findAll();
     }
 
-    public void favoritar(Integer id, Boolean favorito) {
+    public void favoritar(Integer id) {
         Optional<Contato> contato = repository.findById(id);
         contato.ifPresent( c -> {
-            c.setFavorito(favorito);
+            boolean favorito = c.getFavorito() == Boolean.TRUE;
+            c.setFavorito(!favorito);
             repository.save(c);
         });
     }
