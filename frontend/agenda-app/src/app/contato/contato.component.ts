@@ -13,7 +13,7 @@ export class ContatoComponent implements OnInit {
 
   formulario!: FormGroup
   contatos: Contato[] = []
-  colunas: string[] = ['id', 'nome', 'email', 'favorito']
+  colunas: string[] = ['foto', 'id', 'nome', 'email', 'favorito']
 
   constructor( private service: ContatoService, private fb: FormBuilder) { }
 
@@ -48,6 +48,18 @@ export class ContatoComponent implements OnInit {
       let lista: Contato[] = [...this.contatos, response]
       this.contatos = lista
     })
+  }
+
+  uploadFoto(event: any, contato: Contato) {
+    const files = event.target.files
+    if (files) {
+      const foto = files[0]
+      const formData: FormData = new FormData()
+      formData.append("foto", foto)
+      this.service
+        .upload(contato, formData)
+        .subscribe( response => this.listarContatos())
+    }
   }
 
 }
