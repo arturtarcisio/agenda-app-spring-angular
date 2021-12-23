@@ -24,8 +24,12 @@ public class Contato {
     @Column(length = 150, nullable = false)
     private String email;
 
-    @Column()
+    @Column
     private Boolean favorito;
+
+    @Column
+    @Lob
+    private byte[] foto;
 
 
 

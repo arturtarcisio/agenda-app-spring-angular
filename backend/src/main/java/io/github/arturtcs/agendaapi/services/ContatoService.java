@@ -3,8 +3,12 @@ package io.github.arturtcs.agendaapi.services;
 import io.github.arturtcs.agendaapi.model.Contato;
 import io.github.arturtcs.agendaapi.repositories.ContatoRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,5 +37,22 @@ public class ContatoService {
             c.setFavorito(!favorito);
             repository.save(c);
         });
+    }
+
+    public byte[] addPhoto(Integer id, Part arquivo) {
+        Optional<Contato> contato = repository.findById(id);
+        return contato.map( c -> {
+            try {
+                InputStream inputStream = arquivo.getInputStream();
+                byte[] bytes = new byte[(int) arquivo.getSize()];
+                IOUtils.readFully(inputStream, bytes);
+                c.setFoto(bytes);
+                repository.save(c);
+                inputStream.close();
+                return bytes;
+            } catch (IOException e) {
+                return null;
+            }
+        }).orElse(null);
     }
 }
