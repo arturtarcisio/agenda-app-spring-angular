@@ -3,6 +3,7 @@ package io.github.arturtcs.agendaapi.controllers;
 import io.github.arturtcs.agendaapi.model.Contato;
 import io.github.arturtcs.agendaapi.services.ContatoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +34,13 @@ public class ContatoController {
     public List<Contato> listarTodos() {
         return service.listarContatos();
     }
+
+    @GetMapping("/pagina")
+    public Page<Contato> listarPorPaginas (@RequestParam(value="page", defaultValue = "0") Integer pagina,
+                                           @RequestParam(value="size", defaultValue = "10") Integer tamanhoPagina) {
+        return service.listarPorPaginas(pagina, tamanhoPagina);
+    }
+
 
     //Atualizacao parcial da entidade, apenas um atributo. Utilizar o patch.
     @PatchMapping("{id}/favorito")

@@ -4,6 +4,8 @@ import io.github.arturtcs.agendaapi.model.Contato;
 import io.github.arturtcs.agendaapi.repositories.ContatoRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
@@ -28,6 +30,11 @@ public class ContatoService {
 
     public List<Contato> listarContatos() {
         return repository.findAll();
+    }
+
+    public Page<Contato> listarPorPaginas(Integer pagina, Integer tamanhoPagina){
+        PageRequest pageRequest = PageRequest.of(pagina, tamanhoPagina);
+        return repository.findAll(pageRequest);
     }
 
     public void favoritar(Integer id) {
