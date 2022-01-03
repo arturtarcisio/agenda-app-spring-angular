@@ -30,12 +30,12 @@ public class ContatoController {
         service.delete(id);
     }
 
-    @GetMapping
-    public List<Contato> listarTodos() {
-        return service.listarContatos();
-    }
+//    @GetMapping
+//    public List<Contato> listarTodos() {
+//        return service.listarContatos();
+//    }
 
-    @GetMapping("/pagina")
+    @GetMapping
     public Page<Contato> listarPorPaginas (@RequestParam(value="page", defaultValue = "0") Integer pagina,
                                            @RequestParam(value="size", defaultValue = "10") Integer tamanhoPagina) {
         return service.listarPorPaginas(pagina, tamanhoPagina);

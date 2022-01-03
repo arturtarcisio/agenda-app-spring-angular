@@ -56,6 +56,13 @@
 
         </table>
 
+        <mat-paginator [length]="totalElementos"
+            [pageSize]="tamanhoPagina"
+            [pageSizeOptions]="pageSizeOptions"
+            (page) = "paginar($event)" >
+
+        </mat-paginator>
+
     </mat-card>
     </mat-tab>
     <mat-tab>

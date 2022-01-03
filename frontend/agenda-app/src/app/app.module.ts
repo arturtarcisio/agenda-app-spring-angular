@@ -20,6 +20,7 @@ import { ContatoComponent } from './contato/contato.component'
 import { ContatoService } from './contato.service';
 import { FormsModule } from '@angular/forms';
 import { ContatoDetalheComponent } from './contato-detalhe/contato-detalhe.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ContatoDetalheComponent } from './contato-detalhe/contato-detalhe.compo
     MatIconModule,
     MatCardModule,
     MatDialogModule,
+    MatPaginatorModule,
     BrowserAnimationsModule
   ],
   providers: [
