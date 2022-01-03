@@ -20,7 +20,7 @@
                 <input type="file" name="foto" id="foto" (change)="uploadFoto($event, contato)"/>
               </div>
               <div>
-                <img width="50" height="50" src="data:image/jpg;base64,{{ contato.foto }}" alt="Foto do usuário">
+                <img width="50" height="50" src="data:image/jpg;base64,{{ contato.foto }}" alt="Foto do usuário" (click)="visualizarContato(contato)">
               </div>
             </td>
           </ng-container>

@@ -1,3 +1,5 @@
+import { ContatoDetalheComponent } from './../contato-detalhe/contato-detalhe.component';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from '@angular/core';
 import { ContatoService } from '../contato.service';
 import { Contato } from './contato';
@@ -15,7 +17,9 @@ export class ContatoComponent implements OnInit {
   contatos: Contato[] = []
   colunas: string[] = ['foto', 'id', 'nome', 'email', 'favorito']
 
-  constructor( private service: ContatoService, private fb: FormBuilder) { }
+  constructor( private service: ContatoService,
+    private fb: FormBuilder,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.montarFormulario()
@@ -60,6 +64,14 @@ export class ContatoComponent implements OnInit {
         .upload(contato, formData)
         .subscribe( response => this.listarContatos())
     }
+  }
+
+  visualizarContato(contato: Contato) {
+    this.dialog.open(ContatoDetalheComponent, {
+      width: '400px',
+      height: '450px',
+      data: contato
+    })
   }
 
 }
