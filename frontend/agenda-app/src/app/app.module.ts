@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatCardModule } from '@angular/material/card'
 import { MatDialogModule } from '@angular/material/dialog'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { ContatoComponent } from './contato/contato.component'
 import { ContatoService } from './contato.service';
@@ -43,6 +44,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatCardModule,
     MatDialogModule,
     MatPaginatorModule,
+    MatSnackBarModule,
     BrowserAnimationsModule
   ],
   providers: [

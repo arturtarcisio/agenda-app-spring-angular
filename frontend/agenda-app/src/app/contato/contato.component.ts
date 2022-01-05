@@ -6,6 +6,7 @@ import { Contato } from './contato';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-contato',
@@ -19,12 +20,14 @@ export class ContatoComponent implements OnInit {
   colunas: string[] = ['foto', 'id', 'nome', 'email', 'favorito']
   totalElementos = 0
   pagina = 0
-  tamanhoPagina = 10
-  pageSizeOptions: number[] = [10]
+  tamanhoPagina = 5
+  pageSizeOptions: number[] = [5]
+  snackDurationInSeconds = 5
 
   constructor( private service: ContatoService,
     private fb: FormBuilder,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.montarFormulario()
@@ -38,7 +41,7 @@ export class ContatoComponent implements OnInit {
     })
   }
 
-  listarContatos(pagina = 0, tamanho = 10) {
+  listarContatos(pagina = 0, tamanho = 5) {
     this.service.listAll(pagina, tamanho).subscribe( response => {
       this.contatos = response.content
       this.totalElementos = response.totalElements
@@ -56,8 +59,11 @@ export class ContatoComponent implements OnInit {
     const formValues = this.formulario.value
     const contato: Contato = new Contato(formValues.nome, formValues.email)
     this.service.save(contato).subscribe( response => {
-      let lista: Contato[] = [...this.contatos, response]
-      this.contatos = lista
+      this.listarContatos()
+      this.snackBar.open("Cadastrado com sucesso", "Fechar",  {
+        duration: this.snackDurationInSeconds * 1000
+      })
+      this.formulario.reset()
     })
   }
 
@@ -87,3 +93,5 @@ export class ContatoComponent implements OnInit {
   }
 
 }
+
+

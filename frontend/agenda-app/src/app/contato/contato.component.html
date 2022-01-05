@@ -19,7 +19,7 @@
               <div *ngIf = "!contato.foto">
                 <input type="file" name="foto" id="foto" (change)="uploadFoto($event, contato)"/>
               </div>
-              <div>
+              <div *ngIf = "contato.foto">
                 <img width="50" height="50" src="data:image/jpg;base64,{{ contato.foto }}" alt="Foto do usuário" (click)="visualizarContato(contato)">
               </div>
             </td>
@@ -80,8 +80,8 @@
             <input formControlName="nome" matInput placeholder="Digite seu nome">
           </mat-form-field>
 
-          <div *ngIf="this.formulario.controls.nome.errors">
-            <div style="color: red; font-style: italic;" *ngIf="this.formulario.controls.nome.errors.required">
+          <div *ngIf="formulario.controls.nome.errors && !formulario.controls.nome.pristine">
+            <div style="color: red; font-style: italic;" *ngIf="formulario.controls.nome.errors.required">
               Campo nome é obrigatório!
             </div>
           </div>
@@ -91,11 +91,11 @@
             <input formControlName="email" matInput placeholder="Digite seu email">
           </mat-form-field>
 
-          <div *ngIf="this.formulario.controls.email.errors">
-            <div style="color: red; font-style: italic;" *ngIf="this.formulario.controls.email.errors.required">
+          <div *ngIf="formulario.controls.email.errors && !formulario.controls.nome.pristine">
+            <div style="color: red; font-style: italic;" *ngIf="formulario.controls.email.errors.required">
                 Campo email é obrigatório!
             </div>
-            <div style="color: red; font-style: italic;" *ngIf="this.formulario.controls.email.errors.email">
+            <div style="color: red; font-style: italic;" *ngIf="formulario.controls.email.errors.email">
                 Campo email inválido!
             </div>
           </div>
